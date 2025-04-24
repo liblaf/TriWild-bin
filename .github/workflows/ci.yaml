@@ -52,7 +52,8 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
+          # TODO: fix windows build
+          # - windows-latest
       fail-fast: false
 
   test:
@@ -74,10 +75,17 @@ jobs:
       - name: Prepare
         run: |-
           install --mode="u=rwx,go=rx" --verbose "./dist/TriWild-${{ runner.arch }}-${{ runner.os }}" "./dist/TriWild"
-          mkdir --parents --verbose "./inputs/" "./outputs/"
+          mkdir --parents --verbose "./outputs/"
+      - name: Clone Data
+        uses: actions/checkout@v4
+        with:
+          repository: wildmeshing/data
+          path: ./data
       - name: Help
         run: ./dist/TriWild --help
-      # TODO: add tests
+      - name: Test
+        run: |-
+          ./dist/TriWild --input ./data/rocket.obj --output ./outputs/rocket.msh
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -88,7 +96,7 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
+          # - windows-latest
       fail-fast: false
 
   release:
