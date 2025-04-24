@@ -11,6 +11,10 @@ on:
         required: false
         type: string
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     name: Build
@@ -20,7 +24,7 @@ jobs:
         uses: liblaf/actions/install@main
         with:
           brew: coreutils make
-          choco: gnuwin32-coreutils.portable make
+          choco: gnuwin32-coreutils.install make
       - id: checkout
         name: Checkout
         uses: actions/checkout@v4
@@ -61,7 +65,7 @@ jobs:
         uses: liblaf/actions/install@main
         with:
           brew: coreutils
-          choco: gnuwin32-coreutils.portable
+          choco: gnuwin32-coreutils.install
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
