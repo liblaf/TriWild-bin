@@ -20,7 +20,7 @@ jobs:
         uses: liblaf/actions/install@main
         with:
           brew: coreutils make
-          choco: gnuwin32-coreutils.install make
+          choco: gnuwin32-coreutils.portable make
       - id: checkout
         name: Checkout
         uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
         uses: liblaf/actions/install@main
         with:
           brew: coreutils
-          choco: gnuwin32-coreutils.install
+          choco: gnuwin32-coreutils.portable
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
